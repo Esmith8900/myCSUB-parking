@@ -89,14 +89,14 @@ namespace RadialProgressDemo
             lng_11 = -119.105200F
         };  //end GPS enum
 
-        public char LotDetect(float userLat, float userLng)
+        public string LotDetect(float userLat, float userLng)
         {
             //cut the map into sections
             //first cut down kroll (lat_1)
             //lng_01 cut is for group north of kroll
             //lng_11 cut is for group south of kroll
 
-            char result;
+            string result;
 
             if (userLat < GPS.lat_1)   //lot E F G H I
             {
@@ -177,13 +177,13 @@ namespace RadialProgressDemo
                     else if ((userLng >= GPS.llK1) && (userLng <= GPS.rlK1) &&
                             (userLat >= GPS.ltK1) && (userLat <= GPS.utK1))
                     {
-                        result = "K";
+                        result = "K1;
                     }
 
                     else if ((userLng >= GPS.llK2) && (userLng <= GPS.rlK2) &&
                             (userLat >= GPS.ltK2) && (userLat <= GPS.utK2))
                     {
-                        result = "Q";
+                        result = "K2"
                     }
 
                     else if ((userLng >= GPS.llL) && (userLng <= GPS.rlL) &&
@@ -204,7 +204,7 @@ namespace RadialProgressDemo
 
         static void Main(string[] argc)
         {
-            char lot;
+            string lot;
             myCsub_lots x = new myCsub_lots();
 
             float latitude;     //USER LAT HERE
