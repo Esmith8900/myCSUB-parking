@@ -1,0 +1,81 @@
+%%%%%%%%% dataset1 %%%%%%%
+rng default; % For reproducibility
+X = [randn(100,2)*0.75+ones(100,2);randn(100,2)*0.5-ones(100,2)];
+figure;
+plot(X(:,1),X(:,2),'.');
+title 'Randomly Generated Data';
+xlabel 'X Label';
+ylabel 'Y Label';
+%%%%%%%%% end of dataset 1  %%%%%%%%
+
+%%%%%%%%% buildin Kmeans fuction   %%%%%%%%%%
+temp3 = 0;
+da1x = 0;
+da1y = 0;
+da2x = 0;
+da2y = 0;
+ct1 = 0;
+ct2 = 0;
+cent1 = [X(1,1);X(1,2)];
+cent2 = [X(2,1);X(2,2)];
+i = 0;
+while i < 5
+    z = 1;
+    ct1 = 0;
+    ct2 = 0;
+    
+    while z < 201
+        temp1 = dist(X(z,:),cent1);
+        temp2 = dist(X(z,:),cent2);
+        
+        if temp1 < temp2
+            ct1 = ct1 + 1;
+            da1x = da1x + X(z,1);
+            da1y = da1y + X(z,2);            
+            if z == 1
+                idx = 1;
+            else    
+                idx(end+1) = 1;
+            end
+        else
+            ct2 = ct2 + 1;
+            da2x = da2x + X(z,1);
+            da2y = da2y + X(z,2);
+            if z == 1
+                idx = 2;
+            else
+                idx(end+1) = 2;
+            end
+        end
+        z = z+1;
+    end
+    da1x = da1x / ct1;
+    da1y = da1y / ct1;
+    da2x = da2x / ct2;
+    da2y = da2y / ct2;
+    C(1,:) = cent1
+    C(2,:) = cent2
+
+%%%%%%%%%%% replace this sectioin with your code %%%%%%%%%%%%%%
+
+%%%%%%%%  Plot the result   **************
+figure;
+plot(X(idx==1,1),X(idx==1,2),'r.','MarkerSize',12)
+hold on
+plot(X(idx==2,1),X(idx==2,2),'b.','MarkerSize',12)
+plot(C(:,1),C(:,2),'kx','MarkerSize',15,'LineWidth',3)
+legend('Cluster 1','Cluster 2','Centroids','Location','NW')
+title 'Cluster Assignments and Centroids'
+xlabel 'X Label';
+ylabel 'Y Label';
+hold off
+
+    cent1 = [da1x;da1y]
+    cent2 = [da2x;da2y]
+    if sum(abs((idx-temp3))> 0)<1
+        i = 20;
+    else
+        i = i+1;
+    end
+    temp3 = idx;
+end
