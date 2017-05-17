@@ -183,7 +183,7 @@ namespace RadialProgressDemo
                     else if ((userLng >= GPS.llK2) && (userLng <= GPS.rlK2) &&
                             (userLat >= GPS.ltK2) && (userLat <= GPS.utK2))
                     {
-                        result = "K2"
+                        result = "K2";
                     }
 
                     else if ((userLng >= GPS.llL) && (userLng <= GPS.rlL) &&
